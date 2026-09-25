@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tebak Huruf Hiragana & Katakana Lengkap</title>
+  <title>Tebak Seluruh Huruf Hiragana & Katakana</title>
   <style>
     :root {
       --primary-color: #e63946;
@@ -190,7 +190,7 @@
     <!-- Welcome Screen -->
     <div id="welcome-screen" class="welcome-screen">
       <div class="heart-icon">🎯💖</div>
-      <h1>Tebak Huruf Hiragana & Katakana</h1>
+      <h1>Tebak Semua Huruf Japan</h1>
       <div class="welcome-text">
         Halo mas Sugeng cintaku❤️, ini dari lenny lucu2an untuk support mas, hayolo dapat nilai berapa, ada hadiahnya dibelakang
       </div>
@@ -204,7 +204,7 @@
       </div>
 
       <div class="question-card">
-        <div id="question-number" style="font-size: 14px; color: #888; margin-bottom: 8px;">Soal 1 dari 10</div>
+        <div id="question-number" style="font-size: 14px; color: #888; margin-bottom: 8px;">Soal 1 dari 92</div>
         <div id="japanese-question" class="japanese-text">あ</div>
         <div id="meaning-question" class="meaning-text">Huruf di atas dibaca apa?</div>
       </div>
@@ -217,7 +217,7 @@
       <div class="heart-icon">🎁✨</div>
       <h1>Kuis Selesai!</h1>
       <div class="score-badge">
-        Skor Mas Sugeng: <span id="final-score">0</span> / 10
+        Skor Mas Sugeng: <span id="final-score">0</span> / <span id="total-score">92</span>
       </div>
       <div class="final-message">
         Mwahhhhh, sayanggg sekaliiii, itu hadiahnyaaa❤️
@@ -284,11 +284,11 @@
     let score = 0;
     let canAnswer = true;
 
-    function generateRandomQuiz() {
+    function generateAllQuiz() {
+      // Acak urutan seluruh 92 huruf
       const shuffled = [...allKana].sort(() => 0.5 - Math.random());
-      const selected = shuffled.slice(0, 10);
 
-      quizData = selected.map(item => {
+      quizData = shuffled.map(item => {
         const wrongOptions = allKana
           .filter(k => k.romaji !== item.romaji)
           .map(k => k.romaji);
@@ -305,7 +305,7 @@
     }
 
     function startQuiz() {
-      generateRandomQuiz();
+      generateAllQuiz();
       currentQuestion = 0;
       score = 0;
       document.getElementById('welcome-screen').style.display = 'none';
@@ -361,6 +361,7 @@
       document.getElementById('quiz-screen').style.display = 'none';
       document.getElementById('result-screen').style.display = 'flex';
       document.getElementById('final-score').innerText = score;
+      document.getElementById('total-score').innerText = quizData.length;
     }
 
     function restartQuiz() {
