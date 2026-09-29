@@ -68,13 +68,14 @@
     }
 
     .welcome-text {
-      font-size: 17px;
+      font-size: 18px;
       line-height: 1.6;
       color: #555;
       background: #fff5f6;
       padding: 15px;
       border-radius: 12px;
       border: 1px dashed var(--primary-color);
+      font-weight: 600;
     }
 
     .btn {
@@ -201,10 +202,10 @@
   <div class="quiz-container">
     <!-- Welcome Screen -->
     <div id="welcome-screen" class="welcome-screen">
-      <div class="heart-icon">🌸🌸</div>
+      <div class="heart-icon">🌸♥️</div>
       <h1>Tebak Kata Hiragana & Katakana</h1>
       <div class="welcome-text">
-        Halo Mas Sugeng cintaku❤️, saatnya tebak kata/kosakata bahasa Jepang! Ada 30 soal kata Hiragana & Katakana nih. Semangat yaaa, ada hadiah spesial menunggu di akhir! 😘
+        Untuk mamas tersayang, Semangat belajarnya mamas♥️
       </div>
       <button class="btn" onclick="startQuiz()">Mulai Kuis ❤️</button>
     </div>
@@ -233,7 +234,8 @@
         Skor Mas Sugeng: <span id="final-score">0</span> / <span id="total-score">30</span>
       </div>
       <div class="final-message">
-        Mwahhhhh, sayanggg sekaliiii! Hebat banget Mas Sugeng, ini hadiahnyaaa❤️
+        WAH MAMAS SANGAT PINTAR♥️<br>
+        LENNY SANGAT BANGGA, SAYANGGG SEKALII ♥️
       </div>
       <button class="btn" onclick="restartQuiz()">Coba Lagi ❤️</button>
     </div>
@@ -283,7 +285,6 @@
     let canAnswer = true;
 
     function generateQuizData() {
-      // Acak urutan soal
       const shuffled = [...wordList].sort(() => 0.5 - Math.random());
 
       quizData = shuffled.map(item => {
