@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kuis Kosakata Hiragana & Katakana</title>
+  <title>Kuis Bahasa Jepang - Level Susah</title>
   <style>
     :root {
       --primary-color: #ff4b72;
       --primary-hover: #e0365c;
       --bg-color: #fff0f3;
-      --card-bg: #ffffff;
+      --card-bg: rgba(255, 255, 255, 0.92); /* Transparan sedikit agar background foto terlihat indah */
       --text-color: #2b2d42;
       --success-color: #38b000;
       --error-color: #d90429;
@@ -24,6 +24,12 @@
 
     body {
       background-color: var(--bg-color);
+      /* Menampilkan foto sebagai background */
+      background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('mamas.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
       color: var(--text-color);
       display: flex;
       justify-content: center;
@@ -34,8 +40,9 @@
 
     .quiz-container {
       background-color: var(--card-bg);
+      backdrop-filter: blur(8px);
       border-radius: 20px;
-      box-shadow: 0 10px 25px rgba(255, 75, 114, 0.15);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
       width: 100%;
       max-width: 500px;
       padding: 30px;
@@ -47,18 +54,17 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 20px;
+      gap: 15px;
     }
 
-    .heart-icon {
-      font-size: 50px;
-      animation: pulse 1.5s infinite;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-      100% { transform: scale(1); }
+    .profile-photo {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--primary-color);
+      box-shadow: 0 4px 15px rgba(255, 75, 114, 0.4);
+      margin-bottom: 5px;
     }
 
     h1 {
@@ -68,12 +74,12 @@
     }
 
     .welcome-text {
-      font-size: 18px;
+      font-size: 17px;
       line-height: 1.6;
-      color: #555;
+      color: #333;
       background: #fff5f6;
       padding: 15px;
-      border-radius: 12px;
+      border-radius: 15px;
       border: 1px dashed var(--primary-color);
       font-weight: 600;
     }
@@ -106,7 +112,7 @@
       margin-bottom: 15px;
       font-size: 16px;
       font-weight: bold;
-      color: #777;
+      color: #555;
     }
 
     .question-card {
@@ -130,11 +136,12 @@
     }
 
     .japanese-text {
-      font-size: 42px;
+      font-size: 32px;
       font-weight: bold;
       color: var(--primary-color);
       margin-bottom: 8px;
-      word-break: break-all;
+      word-break: break-word;
+      line-height: 1.4;
     }
 
     .meaning-text {
@@ -154,11 +161,12 @@
       border: 2px solid #e9ecef;
       border-radius: 12px;
       padding: 14px;
-      font-size: 17px;
+      font-size: 16px;
       font-weight: bold;
       color: var(--text-color);
       cursor: pointer;
       transition: all 0.2s ease;
+      text-align: left;
     }
 
     .option-btn:hover {
@@ -202,25 +210,28 @@
   <div class="quiz-container">
     <!-- Welcome Screen -->
     <div id="welcome-screen" class="welcome-screen">
-      <div class="heart-icon">🌸♥️</div>
-      <h1>Tebak Kata Hiragana & Katakana</h1>
+      <!-- Foto Mamas di Tengah Kartu Pembuka -->
+      <img src="mamas.jpg" alt="Mamas" class="profile-photo">
+      <h1>Kuis Jepang Level Susah!</h1>
       <div class="welcome-text">
-        Untuk mamas tersayang, Semangat belajarnya mamas♥️
+        Untuk mamas tersayang,<br>
+        Semangat belajarnya mamas♥️<br><br>
+        <strong>Semangat mamas cintakuuu♥️♥️♥️</strong>
       </div>
-      <button class="btn" onclick="startQuiz()">Mulai Kuis ❤️</button>
+      <button class="btn" onclick="startQuiz()">Mulai Tantangan! 🔥</button>
     </div>
 
     <!-- Quiz Screen -->
     <div id="quiz-screen" class="quiz-screen">
       <div class="quiz-header">
-        <h2>🌸 Kuis Kosakata Jepang</h2>
+        <h2>🔥 Level Susah (40 Soal)</h2>
       </div>
 
       <div class="question-card">
-        <div id="question-number" style="font-size: 14px; color: #888; margin-bottom: 5px;">Soal 1 dari 30</div>
-        <div id="badge-type" class="badge-type">Hiragana</div>
-        <div id="japanese-question" class="japanese-text">ありがとう</div>
-        <div id="meaning-question" class="meaning-text">Kata di atas artinya/dibaca apa?</div>
+        <div id="question-number" style="font-size: 14px; color: #888; margin-bottom: 5px;">Soal 1 dari 40</div>
+        <div id="badge-type" class="badge-type">Level Susah</div>
+        <div id="japanese-question" class="japanese-text">よろしくおねがいします</div>
+        <div id="meaning-question" class="meaning-text">Kata/Kalimat di atas artinya apa?</div>
       </div>
 
       <div class="options-grid" id="options-container"></div>
@@ -228,10 +239,10 @@
 
     <!-- Result Screen -->
     <div id="result-screen" class="result-screen" style="display: none;">
-      <div class="heart-icon">🎁✨</div>
+      <img src="mamas.jpg" alt="Mamas" class="profile-photo">
       <h1>Kuis Selesai!</h1>
       <div class="score-badge">
-        Skor Mas Sugeng: <span id="final-score">0</span> / <span id="total-score">30</span>
+        Skor Mas Sugeng: <span id="final-score">0</span> / <span id="total-score">40</span>
       </div>
       <div class="final-message">
         WAH MAMAS SANGAT PINTAR♥️<br>
@@ -242,41 +253,48 @@
   </div>
 
   <script>
-    // Bank Soal Kosakata Hiragana & Katakana (Total 30 Soal)
+    // Bank Soal Level Susah (Total 40 Soal)
     const wordList = [
-      // Hiragana
-      { word: "ありがとう", type: "Hiragana", correct: "Arigatou (Terima kasih)", wrong: ["Konnichiwa (Halo)", "Sayounara (Selamat tinggal)", "Sumimasen (Maaf)"] },
-      { word: "こんにちは", type: "Hiragana", correct: "Konnichiwa (Halo / Selamat siang)", wrong: ["Ohayou (Selamat pagi)", "Konbanwa (Selamat malam)", "Oyasumi (Selamat tidur)"] },
-      { word: "おはよう", type: "Hiragana", correct: "Ohayou (Selamat pagi)", wrong: ["Arigatou (Terima kasih)", "Konnichiwa (Selamat siang)", "Jaa ne (Sampai jumpa)"] },
-      { word: "こんばんわ", type: "Hiragana", correct: "Konbanwa (Selamat malam)", wrong: ["Ohayou (Selamat pagi)", "Tadaima (Aku pulang)", "Okaeri (Selamat datang kembali)"] },
-      { word: "おやすみ", type: "Hiragana", correct: "Oyasumi (Selamat tidur)", wrong: ["Itadakimasu (Selamat makan)", "Gochisosama (Terima kasih makanannya)", "Okaeri (Selamat pulang)"] },
-      { word: "すみません", type: "Hiragana", correct: "Sumimasen (Permisi / Maaf)", wrong: ["Gomenne (Maafkan aku)", "Arigatou (Terima kasih)", "Iie (Tidak)"] },
-      { word: "さようなら", type: "Hiragana", correct: "Sayounara (Selamat tinggal)", wrong: ["Mata ne (Sampai nanti)", "Konnichiwa (Selamat siang)", "Hai (Ya)"] },
-      { word: "いただきます", type: "Hiragana", correct: "Itadakimasu (Selamat makan)", wrong: ["Gochisosama (Selesai makan)", "Tadaima (Aku pulang)", "Okaeri (Selamat datang)"] },
-      { word: "ただいま", type: "Hiragana", correct: "Tadaima (Aku pulang / Saya kembali)", wrong: ["Okaeri (Selamat datang)", "Itekimasu (Saya berangkat)", "Oyasumi (Selamat tidur)"] },
-      { word: "おかえり", type: "Hiragana", correct: "Okaeri (Selamat datang kembali)", wrong: ["Tadaima (Aku pulang)", "Sumimasen (Permisi)", "Gomen (Maaf)"] },
-      { word: "ねこ", type: "Hiragana", correct: "Neko (Kucing)", wrong: ["Inu (Anjing)", "Tori (Burung)", "Sakana (Ikan)"] },
-      { word: "いぬ", type: "Hiragana", correct: "Inu (Anjing)", wrong: ["Neko (Kucing)", "Uma (Kuda)", "Saru (Monyet)"] },
-      { word: "さくら", type: "Hiragana", correct: "Sakura (Bunga Sakura)", wrong: ["Mizu (Air)", "Hana (Bunga)", "Yama (Gunung)"] },
-      { word: "みず", type: "Hiragana", correct: "Mizu (Air)", wrong: ["Ame (Hujan)", "Yuki (Salju)", "Kaze (Angin)"] },
-      { word: "わたし", type: "Hiragana", correct: "Watashi (Saya / Aku)", wrong: ["Anata (Kamu)", "Kare (Dia)", "Minna (Semua)"] },
-
-      // Katakana
-      { word: "コーヒー", type: "Katakana", correct: "Ko-hi- (Kopi)", wrong: ["K-hi- (Teh)", "Ju-su (Jus)", "Mi-ru-ku (Susu)"] },
-      { word: "カメラ", type: "Katakana", correct: "Kamera (Kamera)", wrong: ["Teredi (TV)", "Razio (Radio)", "Pasokon (Komputer)"] },
-      { word: "パン", type: "Katakana", correct: "Pan (Roti)", wrong: ["Penzu (Pena)", "Pai (Pai)", "Pin (Jepit)"] },
-      { word: "テレビ", type: "Katakana", correct: "Terebi (Televisi)", wrong: ["Teredi (Radio)", "Razio (Radio)", "Kamera (Kamera)"] },
-      { word: "ホテル", type: "Katakana", correct: "Hoteru (Hotel)", wrong: ["Hoteru (Restoran)", "Su-pa- (Supermarket)", "Depa-to (Department Store)"] },
-      { word: "タクシー", type: "Katakana", correct: "Takushi- (Taksi)", wrong: ["Basu (Bus)", "Baito (Kerja paruh waktu)", "Toire (Toilet)"] },
-      { word: "バス", type: "Katakana", correct: "Basu (Bus)", wrong: ["Takushi- (Taksi)", "Baito (Kerja paruh waktu)", "Bi-ru (Bir)"] },
-      { word: "トイレ", type: "Katakana", correct: "Toire (Toilet)", wrong: ["Terebi (TV)", "Hoteru (Hotel)", "Tabelu (Meja)"] },
-      { word: "ジュース", type: "Katakana", correct: "Ju-su (Jus)", wrong: ["Ko-hi- (Kopi)", "Sora (Langit)", "Mi-ru-ku (Susu)"] },
-      { word: "アイス", type: "Katakana", correct: "Aisu (Es Krim)", wrong: ["Aka (Merah)", "Ame (Permen)", "Aisu (Es Batu)"] },
-      { word: "ケーキ", type: "Katakana", correct: "Ke-ki (Kue / Cake)", wrong: ["Pan (Roti)", "Ju-su (Jus)", "Kare- (Kari)"] },
-      { word: "ラーメン", type: "Katakana", correct: "Ra-men (Ramen)", wrong: ["Udon (Udon)", "Soba (Soba)", "Sushi (Sushi)"] },
-      { word: "チョコレート", type: "Katakana", correct: "Chokore-to (Cokelat)", wrong: ["Ke-ki (Kue)", "Aisu (Es krim)", "Kandi (Permen)"] },
-      { word: "ノート", type: "Katakana", correct: "No-to (Buku Catatan)", wrong: ["Pen (Pulpen)", "Kado (Kartu)", "Te-pu (Isolasi)"] },
-      { word: "スマホ", type: "Katakana", correct: "Sumaho (Smartphone)", wrong: ["Terebi (TV)", "Kamera (Kamera)", "Pasokon (Laptop)"] }
+      { word: "よろしくおねがいします", type: "Kalimat Hiragana", correct: "Yoroshiku onegaishimasu (Mohon bimbingannya / Salam kenal)", wrong: ["Otsukaresama deshita (Terima kasih atas kerja kerasnya)", "Odemukae arigatou (Terima kasih penjemputannya)", "Gochisosama deshita (Terima kasih makanannya)"] },
+      { word: "おつかれさまでした", type: "Kalimat Hiragana", correct: "Otsukaresama deshita (Terima kasih atas kerja kerasnya)", wrong: ["Omedetou gozaimasu (Selamat)", "Osaki ni shitsurei shimasu (Saya permisi duluan)", "Shitsurei shimasu (Permisi)"] },
+      { word: "おめでとうございます", type: "Kalimat Hiragana", correct: "Omedetou gozaimasu (Selamat!)", wrong: ["Asemadoi desu (Sama-sama)", "Ake-shite mase (Maaf mengganggu)", "Yoroshiku onegaishimasu (Mohon bantuannya)"] },
+      { word: "どういたしました", type: "Kalimat Hiragana", correct: "Douitashimashite (Sama-sama)", wrong: ["Douzo yoroshiku (Salam kenal)", "Sumimasen desha (Maaf)", "Shitsurei shimasu (Permisi)"] },
+      { word: "いってらっしゃい", type: "Kalimat Hiragana", correct: "Itterasshai (Hati-hati di jalan / Selamat pergi)", wrong: ["Itadakimasu (Selamat makan)", "Itekimasu (Saya berangkat)", "Okaerinasai (Selamat pulang)"] },
+      { word: "いってきます", type: "Kalimat Hiragana", correct: "Ittekimasu (Saya berangkat dulu)", wrong: ["Itterasshai (Hati-hati di jalan)", "Tadaima (Aku pulang)", "Okaeri (Selamat datang)"] },
+      { word: "おじゃまします", type: "Kalimat Hiragana", correct: "Ojamashimasu (Permisi / Maaf mengganggu rumahmu)", wrong: ["Otsukaresama (Terima kasih kerja kerasnya)", "Shitsurei shimasu (Permisi keluar)", "Oyasuminasai (Selamat tidur)"] },
+      { word: "だいじょうぶです", type: "Kalimat Hiragana", correct: "Daijoubu desu (Tidak apa-apa / Baik-baik saja)", wrong: ["Oishii desu (Enak)", "Tanoshii desu (Menyenangkan)", "Muzukashii desu (Sulit)"] },
+      { word: "わかりません", type: "Kalimat Hiragana", correct: "Wakarimansen (Saya tidak mengerti / tidak tahu)", wrong: ["Wakarimasu (Saya paham)", "Shirimasen (Saya kenal)", "Dekimasen (Tidak bisa)"] },
+      { word: "がんばってください", type: "Kalimat Hiragana", correct: "Ganbatte kudasai (Semangat ya!)", wrong: ["Ki wo tsukete kudasai (Hati-hati)", "Matte kudasai (Tunggu)", "Mite kudasai (Lihatlah)"] },
+      { word: "むずかしい", type: "Kosakata Hiragana", correct: "Muzukashii (Sulit / Susah)", wrong: ["Yasashii (Mudah/Ramah)", "Tanoshii (Seru)", "Ooshiko (Tinggi)"] },
+      { word: "やさしい", type: "Kosakata Hiragana", correct: "Yasashii (Mudah / Baik hati)", wrong: ["Isogashii (Sibuk)", "Muzukashii (Sulit)", "Kawabii (Lucu)"] },
+      { word: "いそがしい", type: "Kosakata Hiragana", correct: "Isogashii (Sibuk)", wrong: ["Tanoshikatta (Seru)", "Ureshii (Senang)", "Kanashii (Sedih)"] },
+      { word: "うれしい", type: "Kosakata Hiragana", correct: "Ureshii (Senang / Bahagia)", wrong: ["Kanashii (Sedih)", "Tanoshikatta (Menyenangkan)", "Oshii (Sayang sekali)"] },
+      { word: "たのしい", type: "Kosakata Hiragana", correct: "Tanoshii (Menyenangkan / Seru)", wrong: ["Oshii (Sayang sekali)", "Isogashii (Sibuk)", "Muzukashii (Sulit)"] },
+      { word: "あたたかい", type: "Kosakata Hiragana", correct: "Atatakai (Hangat)", wrong: ["Atsui (Panas)", "Samui (Dingin)", "Tsumetai (Dingin untuk benda)"] },
+      { word: "つめたい", type: "Kosakata Hiragana", correct: "Tsumetai (Dingin untuk benda/sentuhan)", wrong: ["Samui (Udara dingin)", "Atsui (Panas)", "Atatakai (Hangat)"] },
+      { word: "おもしろい", type: "Kosakata Hiragana", correct: "Omoshiroi (Menarik / Lucu)", wrong: ["Kawaii (Imut)", "Kirei (Cantik)", "Subarashii (Luar biasa)"] },
+      { word: "すばらしい", type: "Kosakata Hiragana", correct: "Subarashii (Luar biasa / Hebat)", wrong: ["Omoshiroi (Menarik)", "Kawaii (Imut)", "Kirei (Indah)"] },
+      { word: "きれいです", type: "Kosakata Hiragana", correct: "Kirei desu (Cantik / Indah / Bersih)", wrong: ["Kawai desu (Imut)", "Oishii desu (Enak)", "Takai desu (Mahal)"] },
+      { word: "アイスクリーム", type: "Katakana Panjang", correct: "Aisukuri-mu (Es Krim)", wrong: ["Aisuko-hi- (Es Kopi)", "Aisutei- (Es Teh)", "Aisu ke-ki (Kue Es)"] },
+      { word: "スーパーマーケット", type: "Katakana Panjang", correct: "Su-pa-ma-ketto (Supermarket)", wrong: ["Depa-tomentosutoa (Department Store)", "Konbiniensusutoa (Minimarket)", "Restoran (Restoran)"] },
+      { word: "コンビニエンスストア", type: "Katakana Panjang", correct: "Konbiniensusutoa (Convenience Store / Minimarket)", wrong: ["Su-pa-ma-ketto (Supermarket)", "Depa-to (Department Store)", "Hoteru (Hotel)"] },
+      { word: "デパートメントストア", type: "Katakana Panjang", correct: "Depa-tomentosutoa (Department Store / Toserba)", wrong: ["Su-pa-ma-ketto (Supermarket)", "Konbiniensusutoa (Minimarket)", "Restoran (Restoran)"] },
+      { word: "エレベーター", type: "Katakana Panjang", correct: "Erebe-ta- (Elevator / Lift)", wrong: ["Eskare-ta- (Eskalator)", "Ea-kon (AC)", "Ero-pe-n (Pesawat)"] },
+      { word: "エスカレーター", type: "Katakana Panjang", correct: "Esukare-ta- (Eskalator / Tangga Jalan)", wrong: ["Erebe-ta- (Lift)", "Esukare-ta- (Eskalator)", "Ea-kon (AC)"] },
+      { word: "エアコンディショナー", type: "Katakana Panjang", correct: "Eakondishona- (Air Conditioner / AC)", wrong: ["Erebe-ta- (Lift)", "Esukare-ta- (Eskalator)", "Kamera (Kamera)"] },
+      { word: "スマートフォッン", type: "Katakana Panjang", correct: "Suma-tofon (Smartphone)", wrong: ["Pasokon (Komputer)", "Terebi (Televisi)", "Razio (Radio)"] },
+      { word: "パーソナルコンピューター", type: "Katakana Panjang", correct: "Pa-sonaru konpyu-ta- (Personal Computer / PC)", wrong: ["Suma-tofon (Smartphone)", "Terebi (TV)", "Kamera (Kamera)"] },
+      { word: "レストラン", type: "Katakana Panjang", correct: "Restoran (Restoran)", wrong: ["Hoteru (Hotel)", "Su-pa- (Supermarket)", "Toire (Toilet)"] },
+      { word: "プレゼントをあげる", type: "Gabungan Kana", correct: "Purezento wo ageru (Memberi hadiah)", wrong: ["Purezento wo morau (Menerima hadiah)", "Ke-ki wo taberu (Makan kue)", "Ko-hi- wo nomu (Minum kopi)"] },
+      { word: "コーヒーをのむ", type: "Gabungan Kana", correct: "Ko-hi- wo nomu (Minum kopi)", wrong: ["Ko-hi- wo kau (Membeli kopi)", "Ju-su wo nomu (Minum jus)", "Pan wo taberu (Makan roti)"] },
+      { word: "パンをたべる", type: "Gabungan Kana", correct: "Pan wo taberu (Makan roti)", wrong: ["Pan wo kau (Membeli roti)", "Ke-ki wo taberu (Makan kue)", "Ramen wo taberu (Makan ramen)"] },
+      { word: "タクシーにのる", type: "Gabungan Kana", correct: "Takushi- ni noru (Naik taksi)", wrong: ["Basu ni noru (Naik bus)", "Takushi- wo yobu (Memanggil taksi)", "Hoteru ni iku (Pergi ke hotel)"] },
+      { word: "バスにのる", type: "Gabungan Kana", correct: "Basu ni noru (Naik bus)", wrong: ["Takushi- ni noru (Naik taksi)", "Densha ni noru (Naik kereta)", "Basu wo matsu (Menunggu bus)"] },
+      { word: "ホテルにとまる", type: "Gabungan Kana", correct: "Hoteru ni tomaru (Menginap di hotel)", wrong: ["Hoteru ni iku (Pergi ke hotel)", "Restoran ni iku (Pergi ke restoran)", "Uchi ni kaeru (Pulang ke rumah)"] },
+      { word: "カメラでしゃしんをとる", type: "Gabungan Kana", correct: "Kamera de shashin wo toru (Mengambil foto dengan kamera)", wrong: ["Suma-tofon wo kau (Membeli smartphone)", "Terebi wo miru (Menonton TV)", "Kamera wo kau (Membeli kamera)"] },
+      { word: "テレビをみる", type: "Gabungan Kana", correct: "Terebi wo miru (Menonton TV)", wrong: ["Eiga wo miru (Menonton film)", "Razio wo kiku (Mendengar radio)", "Terebi wo kau (Membeli TV)"] },
+      { word: "だいすきです", type: "Ungkapan Hiragana", correct: "Daisuki desu (Sangat suka / Sayang banget)", wrong: ["Suki desu (Suka)", "Kirai desu (Benci)", "Aishiteru (Aku mencintaimu)"] },
+      { word: "あいしている", type: "Ungkapan Hiragana", correct: "Aishiteru (Aku mencintaimu)", wrong: ["Daisuki desu (Sangat suka)", "Suki desu (Suka)", "Kirei desu (Cantik)"] }
     ];
 
     let quizData = [];
