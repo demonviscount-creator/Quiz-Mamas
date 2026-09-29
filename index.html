@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tebak Seluruh Huruf Hiragana & Katakana</title>
+  <title>Kuis Kosakata Hiragana & Katakana</title>
   <style>
     :root {
-      --primary-color: #e63946;
-      --primary-hover: #d62828;
+      --primary-color: #ff4b72;
+      --primary-hover: #e0365c;
       --bg-color: #fff0f3;
       --card-bg: #ffffff;
       --text-color: #2b2d42;
@@ -35,7 +35,7 @@
     .quiz-container {
       background-color: var(--card-bg);
       border-radius: 20px;
-      box-shadow: 0 10px 25px rgba(230, 57, 70, 0.15);
+      box-shadow: 0 10px 25px rgba(255, 75, 114, 0.15);
       width: 100%;
       max-width: 500px;
       padding: 30px;
@@ -64,11 +64,11 @@
     h1 {
       color: var(--primary-color);
       font-size: 24px;
-      margin-bottom: 10px;
+      margin-bottom: 5px;
     }
 
     .welcome-text {
-      font-size: 18px;
+      font-size: 17px;
       line-height: 1.6;
       color: #555;
       background: #fff5f6;
@@ -87,7 +87,7 @@
       border-radius: 30px;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 10px rgba(230, 57, 70, 0.3);
+      box-shadow: 0 4px 10px rgba(255, 75, 114, 0.3);
       width: 100%;
       margin-top: 10px;
     }
@@ -102,7 +102,7 @@
     }
 
     .quiz-header {
-      margin-bottom: 20px;
+      margin-bottom: 15px;
       font-size: 16px;
       font-weight: bold;
       color: #777;
@@ -117,21 +117,33 @@
       box-shadow: 0 4px 6px rgba(0,0,0,0.02);
     }
 
-    .japanese-text {
-      font-size: 64px;
-      font-weight: bold;
+    .badge-type {
+      display: inline-block;
+      background-color: #ffe5ec;
       color: var(--primary-color);
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: bold;
       margin-bottom: 10px;
     }
 
+    .japanese-text {
+      font-size: 42px;
+      font-weight: bold;
+      color: var(--primary-color);
+      margin-bottom: 8px;
+      word-break: break-all;
+    }
+
     .meaning-text {
-      font-size: 16px;
+      font-size: 15px;
       color: #666;
     }
 
     .options-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr;
       gap: 12px;
       margin-bottom: 20px;
     }
@@ -140,8 +152,8 @@
       background-color: #f8f9fa;
       border: 2px solid #e9ecef;
       border-radius: 12px;
-      padding: 15px;
-      font-size: 22px;
+      padding: 14px;
+      font-size: 17px;
       font-weight: bold;
       color: var(--text-color);
       cursor: pointer;
@@ -176,7 +188,7 @@
     }
 
     .final-message {
-      font-size: 20px;
+      font-size: 19px;
       font-weight: bold;
       color: var(--primary-color);
       line-height: 1.5;
@@ -189,10 +201,10 @@
   <div class="quiz-container">
     <!-- Welcome Screen -->
     <div id="welcome-screen" class="welcome-screen">
-      <div class="heart-icon">🎯💖</div>
-      <h1>Tebak Semua Huruf Japan</h1>
+      <div class="heart-icon">🌸🌸</div>
+      <h1>Tebak Kata Hiragana & Katakana</h1>
       <div class="welcome-text">
-        Halo mas Sugeng cintaku❤️, ini dari lenny lucu2an untuk support mas, hayolo dapat nilai berapa, ada hadiahnya dibelakang
+        Halo Mas Sugeng cintaku❤️, saatnya tebak kata/kosakata bahasa Jepang! Ada 30 soal kata Hiragana & Katakana nih. Semangat yaaa, ada hadiah spesial menunggu di akhir! 😘
       </div>
       <button class="btn" onclick="startQuiz()">Mulai Kuis ❤️</button>
     </div>
@@ -200,13 +212,14 @@
     <!-- Quiz Screen -->
     <div id="quiz-screen" class="quiz-screen">
       <div class="quiz-header">
-        <h2>🎯 Tebak Huruf Dasar</h2>
+        <h2>🌸 Kuis Kosakata Jepang</h2>
       </div>
 
       <div class="question-card">
-        <div id="question-number" style="font-size: 14px; color: #888; margin-bottom: 8px;">Soal 1 dari 92</div>
-        <div id="japanese-question" class="japanese-text">あ</div>
-        <div id="meaning-question" class="meaning-text">Huruf di atas dibaca apa?</div>
+        <div id="question-number" style="font-size: 14px; color: #888; margin-bottom: 5px;">Soal 1 dari 30</div>
+        <div id="badge-type" class="badge-type">Hiragana</div>
+        <div id="japanese-question" class="japanese-text">ありがとう</div>
+        <div id="meaning-question" class="meaning-text">Kata di atas artinya/dibaca apa?</div>
       </div>
 
       <div class="options-grid" id="options-container"></div>
@@ -217,66 +230,51 @@
       <div class="heart-icon">🎁✨</div>
       <h1>Kuis Selesai!</h1>
       <div class="score-badge">
-        Skor Mas Sugeng: <span id="final-score">0</span> / <span id="total-score">92</span>
+        Skor Mas Sugeng: <span id="final-score">0</span> / <span id="total-score">30</span>
       </div>
       <div class="final-message">
-        Mwahhhhh, sayanggg sekaliiii, itu hadiahnyaaa❤️
+        Mwahhhhh, sayanggg sekaliiii! Hebat banget Mas Sugeng, ini hadiahnyaaa❤️
       </div>
       <button class="btn" onclick="restartQuiz()">Coba Lagi ❤️</button>
     </div>
   </div>
 
   <script>
-    const allKana = [
+    // Bank Soal Kosakata Hiragana & Katakana (Total 30 Soal)
+    const wordList = [
       // Hiragana
-      { char: "あ", type: "Hiragana", romaji: "a" }, { char: "い", type: "Hiragana", romaji: "i" },
-      { char: "う", type: "Hiragana", romaji: "u" }, { char: "え", type: "Hiragana", romaji: "e" },
-      { char: "お", type: "Hiragana", romaji: "o" }, { char: "か", type: "Hiragana", romaji: "ka" },
-      { char: "き", type: "Hiragana", romaji: "ki" }, { char: "く", type: "Hiragana", romaji: "ku" },
-      { char: "け", type: "Hiragana", romaji: "ke" }, { char: "こ", type: "Hiragana", romaji: "ko" },
-      { char: "さ", type: "Hiragana", romaji: "sa" }, { char: "し", type: "Hiragana", romaji: "shi" },
-      { char: "す", type: "Hiragana", romaji: "su" }, { char: "せ", type: "Hiragana", romaji: "se" },
-      { char: "そ", type: "Hiragana", romaji: "so" }, { char: "た", type: "Hiragana", romaji: "ta" },
-      { char: "ち", type: "Hiragana", romaji: "chi" }, { char: "つ", type: "Hiragana", romaji: "tsu" },
-      { char: "て", type: "Hiragana", romaji: "te" }, { char: "と", type: "Hiragana", romaji: "to" },
-      { char: "な", type: "Hiragana", romaji: "na" }, { char: "に", type: "Hiragana", romaji: "ni" },
-      { char: "ぬ", type: "Hiragana", romaji: "nu" }, { char: "ね", type: "Hiragana", romaji: "ne" },
-      { char: "の", type: "Hiragana", romaji: "no" }, { char: "は", type: "Hiragana", romaji: "ha" },
-      { char: "ひ", type: "Hiragana", romaji: "hi" }, { char: "ふ", type: "Hiragana", romaji: "fu" },
-      { char: "へ", type: "Hiragana", romaji: "he" }, { char: "ほ", type: "Hiragana", romaji: "ho" },
-      { char: "ま", type: "Hiragana", romaji: "ma" }, { char: "み", type: "Hiragana", romaji: "mi" },
-      { char: "む", type: "Hiragana", romaji: "mu" }, { char: "め", type: "Hiragana", romaji: "me" },
-      { char: "も", type: "Hiragana", romaji: "mo" }, { char: "や", type: "Hiragana", romaji: "ya" },
-      { char: "ゆ", type: "Hiragana", romaji: "yu" }, { char: "よ", type: "Hiragana", romaji: "yo" },
-      { char: "ら", type: "Hiragana", romaji: "ra" }, { char: "り", type: "Hiragana", romaji: "ri" },
-      { char: "る", type: "Hiragana", romaji: "ru" }, { char: "れ", type: "Hiragana", romaji: "re" },
-      { char: "ろ", type: "Hiragana", romaji: "ro" }, { char: "わ", type: "Hiragana", romaji: "wa" },
-      { char: "を", type: "Hiragana", romaji: "wo" }, { char: "ん", type: "Hiragana", romaji: "n" },
+      { word: "ありがとう", type: "Hiragana", correct: "Arigatou (Terima kasih)", wrong: ["Konnichiwa (Halo)", "Sayounara (Selamat tinggal)", "Sumimasen (Maaf)"] },
+      { word: "こんにちは", type: "Hiragana", correct: "Konnichiwa (Halo / Selamat siang)", wrong: ["Ohayou (Selamat pagi)", "Konbanwa (Selamat malam)", "Oyasumi (Selamat tidur)"] },
+      { word: "おはよう", type: "Hiragana", correct: "Ohayou (Selamat pagi)", wrong: ["Arigatou (Terima kasih)", "Konnichiwa (Selamat siang)", "Jaa ne (Sampai jumpa)"] },
+      { word: "こんばんわ", type: "Hiragana", correct: "Konbanwa (Selamat malam)", wrong: ["Ohayou (Selamat pagi)", "Tadaima (Aku pulang)", "Okaeri (Selamat datang kembali)"] },
+      { word: "おやすみ", type: "Hiragana", correct: "Oyasumi (Selamat tidur)", wrong: ["Itadakimasu (Selamat makan)", "Gochisosama (Terima kasih makanannya)", "Okaeri (Selamat pulang)"] },
+      { word: "すみません", type: "Hiragana", correct: "Sumimasen (Permisi / Maaf)", wrong: ["Gomenne (Maafkan aku)", "Arigatou (Terima kasih)", "Iie (Tidak)"] },
+      { word: "さようなら", type: "Hiragana", correct: "Sayounara (Selamat tinggal)", wrong: ["Mata ne (Sampai nanti)", "Konnichiwa (Selamat siang)", "Hai (Ya)"] },
+      { word: "いただきます", type: "Hiragana", correct: "Itadakimasu (Selamat makan)", wrong: ["Gochisosama (Selesai makan)", "Tadaima (Aku pulang)", "Okaeri (Selamat datang)"] },
+      { word: "ただいま", type: "Hiragana", correct: "Tadaima (Aku pulang / Saya kembali)", wrong: ["Okaeri (Selamat datang)", "Itekimasu (Saya berangkat)", "Oyasumi (Selamat tidur)"] },
+      { word: "おかえり", type: "Hiragana", correct: "Okaeri (Selamat datang kembali)", wrong: ["Tadaima (Aku pulang)", "Sumimasen (Permisi)", "Gomen (Maaf)"] },
+      { word: "ねこ", type: "Hiragana", correct: "Neko (Kucing)", wrong: ["Inu (Anjing)", "Tori (Burung)", "Sakana (Ikan)"] },
+      { word: "いぬ", type: "Hiragana", correct: "Inu (Anjing)", wrong: ["Neko (Kucing)", "Uma (Kuda)", "Saru (Monyet)"] },
+      { word: "さくら", type: "Hiragana", correct: "Sakura (Bunga Sakura)", wrong: ["Mizu (Air)", "Hana (Bunga)", "Yama (Gunung)"] },
+      { word: "みず", type: "Hiragana", correct: "Mizu (Air)", wrong: ["Ame (Hujan)", "Yuki (Salju)", "Kaze (Angin)"] },
+      { word: "わたし", type: "Hiragana", correct: "Watashi (Saya / Aku)", wrong: ["Anata (Kamu)", "Kare (Dia)", "Minna (Semua)"] },
 
       // Katakana
-      { char: "ア", type: "Katakana", romaji: "a" }, { char: "イ", type: "Katakana", romaji: "i" },
-      { char: "ウ", type: "Katakana", romaji: "u" }, { char: "エ", type: "Katakana", romaji: "e" },
-      { char: "オ", type: "Katakana", romaji: "o" }, { char: "カ", type: "Katakana", romaji: "ka" },
-      { char: "キ", type: "Katakana", romaji: "ki" }, { char: "ク", type: "Katakana", romaji: "ku" },
-      { char: "ケ", type: "Katakana", romaji: "ke" }, { char: "コ", type: "Katakana", romaji: "ko" },
-      { char: "サ", type: "Katakana", romaji: "sa" }, { char: "シ", type: "Katakana", romaji: "shi" },
-      { char: "ス", type: "Katakana", romaji: "su" }, { char: "セ", type: "Katakana", romaji: "se" },
-      { char: "ソ", type: "Katakana", romaji: "so" }, { char: "タ", type: "Katakana", romaji: "ta" },
-      { char: "チ", type: "Katakana", romaji: "chi" }, { char: "ツ", type: "Katakana", romaji: "tsu" },
-      { char: "テ", type: "Katakana", romaji: "te" }, { char: "ト", type: "Katakana", romaji: "to" },
-      { char: "ナ", type: "Katakana", romaji: "na" }, { char: "ニ", type: "Katakana", romaji: "ni" },
-      { char: "ヌ", type: "Katakana", romaji: "nu" }, { char: "ネ", type: "Katakana", romaji: "ne" },
-      { char: "ノ", type: "Katakana", romaji: "no" }, { char: "ハ", type: "Katakana", romaji: "ha" },
-      { char: "ヒ", type: "Katakana", romaji: "hi" }, { char: "フ", type: "Katakana", romaji: "fu" },
-      { char: "ヘ", type: "Katakana", romaji: "he" }, { char: "ホ", type: "Katakana", romaji: "ho" },
-      { char: "マ", type: "Katakana", romaji: "ma" }, { char: "ミ", type: "Katakana", romaji: "mi" },
-      { char: "ム", type: "Katakana", romaji: "mu" }, { char: "メ", type: "Katakana", romaji: "me" },
-      { char: "モ", type: "Katakana", romaji: "mo" }, { char: "ヤ", type: "Katakana", romaji: "ya" },
-      { char: "ユ", type: "Katakana", romaji: "yu" }, { char: "ヨ", type: "Katakana", romaji: "yo" },
-      { char: "ラ", type: "Katakana", romaji: "ra" }, { char: "リ", type: "Katakana", romaji: "ri" },
-      { char: "ル", type: "Katakana", romaji: "ru" }, { char: "レ", type: "Katakana", romaji: "re" },
-      { char: "ロ", type: "Katakana", romaji: "ro" }, { char: "ワ", type: "Katakana", romaji: "wa" },
-      { char: "ヲ", type: "Katakana", romaji: "wo" }, { char: "ン", type: "Katakana", romaji: "n" }
+      { word: "コーヒー", type: "Katakana", correct: "Ko-hi- (Kopi)", wrong: ["K-hi- (Teh)", "Ju-su (Jus)", "Mi-ru-ku (Susu)"] },
+      { word: "カメラ", type: "Katakana", correct: "Kamera (Kamera)", wrong: ["Teredi (TV)", "Razio (Radio)", "Pasokon (Komputer)"] },
+      { word: "パン", type: "Katakana", correct: "Pan (Roti)", wrong: ["Penzu (Pena)", "Pai (Pai)", "Pin (Jepit)"] },
+      { word: "テレビ", type: "Katakana", correct: "Terebi (Televisi)", wrong: ["Teredi (Radio)", "Razio (Radio)", "Kamera (Kamera)"] },
+      { word: "ホテル", type: "Katakana", correct: "Hoteru (Hotel)", wrong: ["Hoteru (Restoran)", "Su-pa- (Supermarket)", "Depa-to (Department Store)"] },
+      { word: "タクシー", type: "Katakana", correct: "Takushi- (Taksi)", wrong: ["Basu (Bus)", "Baito (Kerja paruh waktu)", "Toire (Toilet)"] },
+      { word: "バス", type: "Katakana", correct: "Basu (Bus)", wrong: ["Takushi- (Taksi)", "Baito (Kerja paruh waktu)", "Bi-ru (Bir)"] },
+      { word: "トイレ", type: "Katakana", correct: "Toire (Toilet)", wrong: ["Terebi (TV)", "Hoteru (Hotel)", "Tabelu (Meja)"] },
+      { word: "ジュース", type: "Katakana", correct: "Ju-su (Jus)", wrong: ["Ko-hi- (Kopi)", "Sora (Langit)", "Mi-ru-ku (Susu)"] },
+      { word: "アイス", type: "Katakana", correct: "Aisu (Es Krim)", wrong: ["Aka (Merah)", "Ame (Permen)", "Aisu (Es Batu)"] },
+      { word: "ケーキ", type: "Katakana", correct: "Ke-ki (Kue / Cake)", wrong: ["Pan (Roti)", "Ju-su (Jus)", "Kare- (Kari)"] },
+      { word: "ラーメン", type: "Katakana", correct: "Ra-men (Ramen)", wrong: ["Udon (Udon)", "Soba (Soba)", "Sushi (Sushi)"] },
+      { word: "チョコレート", type: "Katakana", correct: "Chokore-to (Cokelat)", wrong: ["Ke-ki (Kue)", "Aisu (Es krim)", "Kandi (Permen)"] },
+      { word: "ノート", type: "Katakana", correct: "No-to (Buku Catatan)", wrong: ["Pen (Pulpen)", "Kado (Kartu)", "Te-pu (Isolasi)"] },
+      { word: "スマホ", type: "Katakana", correct: "Sumaho (Smartphone)", wrong: ["Terebi (TV)", "Kamera (Kamera)", "Pasokon (Laptop)"] }
     ];
 
     let quizData = [];
@@ -284,28 +282,23 @@
     let score = 0;
     let canAnswer = true;
 
-    function generateAllQuiz() {
-      // Acak urutan seluruh 92 huruf
-      const shuffled = [...allKana].sort(() => 0.5 - Math.random());
+    function generateQuizData() {
+      // Acak urutan soal
+      const shuffled = [...wordList].sort(() => 0.5 - Math.random());
 
       quizData = shuffled.map(item => {
-        const wrongOptions = allKana
-          .filter(k => k.romaji !== item.romaji)
-          .map(k => k.romaji);
-        const uniqueWrong = [...new Set(wrongOptions)].sort(() => 0.5 - Math.random()).slice(0, 3);
-        
-        const options = [item.romaji, ...uniqueWrong].sort(() => 0.5 - Math.random());
+        const options = [item.correct, ...item.wrong].sort(() => 0.5 - Math.random());
         return {
-          char: item.char,
+          word: item.word,
           type: item.type,
           options: options,
-          correct: options.indexOf(item.romaji)
+          correctIndex: options.indexOf(item.correct)
         };
       });
     }
 
     function startQuiz() {
-      generateAllQuiz();
+      generateQuizData();
       currentQuestion = 0;
       score = 0;
       document.getElementById('welcome-screen').style.display = 'none';
@@ -317,8 +310,8 @@
       canAnswer = true;
       const q = quizData[currentQuestion];
       document.getElementById('question-number').innerText = `Soal ${currentQuestion + 1} dari ${quizData.length}`;
-      document.getElementById('japanese-question').innerText = q.char;
-      document.getElementById('meaning-question').innerText = `Huruf ${q.type} di atas dibaca apa?`;
+      document.getElementById('badge-type').innerText = q.type;
+      document.getElementById('japanese-question').innerText = q.word;
 
       const optionsContainer = document.getElementById('options-container');
       optionsContainer.innerHTML = '';
@@ -339,12 +332,12 @@
       const q = quizData[currentQuestion];
       const buttons = document.querySelectorAll('.option-btn');
 
-      if (selectedIndex === q.correct) {
+      if (selectedIndex === q.correctIndex) {
         btnElement.classList.add('correct');
         score++;
       } else {
         btnElement.classList.add('wrong');
-        buttons[q.correct].classList.add('correct');
+        buttons[q.correctIndex].classList.add('correct');
       }
 
       setTimeout(() => {
