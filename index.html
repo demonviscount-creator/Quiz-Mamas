@@ -9,10 +9,12 @@
       --primary-color: #ff4b72;
       --primary-hover: #e0365c;
       --bg-color: #fff0f3;
-      --card-bg: rgba(255, 255, 255, 0.92); /* Transparan sedikit agar background foto terlihat indah */
+      --card-bg: rgba(255, 255, 255, 0.92);
       --text-color: #2b2d42;
       --success-color: #38b000;
       --error-color: #d90429;
+      /* Link gambar langsung dari GitHub Pages kamu */
+      --photo-url: url('https://demonviscount-creator.github.io/Quiz-Mamas/mamas.jpg');
     }
 
     * {
@@ -24,8 +26,7 @@
 
     body {
       background-color: var(--bg-color);
-      /* Menampilkan foto sebagai background */
-      background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('mamas.jpg');
+      background-image: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), var(--photo-url);
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -210,8 +211,7 @@
   <div class="quiz-container">
     <!-- Welcome Screen -->
     <div id="welcome-screen" class="welcome-screen">
-      <!-- Foto Mamas di Tengah Kartu Pembuka -->
-      <img src="mamas.jpg" alt="Mamas" class="profile-photo">
+      <img src="https://demonviscount-creator.github.io/Quiz-Mamas/mamas.jpg" alt="Mamas" class="profile-photo">
       <h1>Kuis Jepang Level Susah!</h1>
       <div class="welcome-text">
         Untuk mamas tersayang,<br>
@@ -239,7 +239,7 @@
 
     <!-- Result Screen -->
     <div id="result-screen" class="result-screen" style="display: none;">
-      <img src="mamas.jpg" alt="Mamas" class="profile-photo">
+      <img src="https://demonviscount-creator.github.io/Quiz-Mamas/mamas.jpg" alt="Mamas" class="profile-photo">
       <h1>Kuis Selesai!</h1>
       <div class="score-badge">
         Skor Mas Sugeng: <span id="final-score">0</span> / <span id="total-score">40</span>
@@ -253,7 +253,6 @@
   </div>
 
   <script>
-    // Bank Soal Level Susah (Total 40 Soal)
     const wordList = [
       { word: "よろしくおねがいします", type: "Kalimat Hiragana", correct: "Yoroshiku onegaishimasu (Mohon bimbingannya / Salam kenal)", wrong: ["Otsukaresama deshita (Terima kasih atas kerja kerasnya)", "Odemukae arigatou (Terima kasih penjemputannya)", "Gochisosama deshita (Terima kasih makanannya)"] },
       { word: "おつかれさまでした", type: "Kalimat Hiragana", correct: "Otsukaresama deshita (Terima kasih atas kerja kerasnya)", wrong: ["Omedetou gozaimasu (Selamat)", "Osaki ni shitsurei shimasu (Saya permisi duluan)", "Shitsurei shimasu (Permisi)"] },
