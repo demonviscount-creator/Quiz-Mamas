@@ -3,16 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kuis Bahasa Jepang N5 (Bab 1-5)</title>
+  <title>Kuis Flashcard Kanji N5 Lucu! ✨</title>
   <style>
     :root {
-      --primary-color: #ff4b72;
-      --primary-hover: #e0365c;
-      --bg-color: #fff0f3;
-      --card-bg: rgba(255, 255, 255, 0.92);
-      --text-color: #2b2d42;
-      --success-color: #38b000;
-      --error-color: #d90429;
+      --bg-gradient: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #feada6 100%);
+      --card-bg: rgba(255, 255, 255, 0.95);
+      --primary-color: #ff6b81;
+      --secondary-color: #70a1ff;
+      --accent-yellow: #fffa65;
+      --text-color: #2f3542;
       --photo-url: url('https://demonviscount-creator.github.io/Quiz-Mamas/mamas.jpg');
     }
 
@@ -20,17 +19,15 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Comic Sans MS', 'Chalkboard SE', 'Segoe UI', sans-serif;
     }
 
     body {
-      background-color: var(--bg-color);
-      background-image: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), var(--photo-url);
+      background: var(--bg-gradient);
+      background-image: linear-gradient(rgba(255, 240, 243, 0.7), rgba(255, 240, 243, 0.7)), var(--photo-url);
       background-size: cover;
       background-position: center;
-      background-repeat: no-repeat;
       background-attachment: fixed;
-      color: var(--text-color);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -38,358 +35,404 @@
       padding: 20px;
     }
 
-    .quiz-container {
-      background-color: var(--card-bg);
-      backdrop-filter: blur(8px);
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    .container {
+      background: var(--card-bg);
+      border-radius: 30px;
+      box-shadow: 0 15px 35px rgba(255, 107, 129, 0.3);
       width: 100%;
-      max-width: 500px;
-      padding: 30px;
+      max-width: 480px;
+      padding: 25px;
       text-align: center;
-      border: 2px solid #ffccd5;
+      border: 4px solid #fff;
     }
 
-    .welcome-screen, .result-screen {
+    .profile-header {
       display: flex;
-      flex-direction: column;
       align-items: center;
-      gap: 15px;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 15px;
     }
 
     .profile-photo {
-      width: 130px;
-      height: 130px;
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
       object-fit: cover;
-      border: 4px solid var(--primary-color);
-      box-shadow: 0 4px 15px rgba(255, 75, 114, 0.4);
-      margin-bottom: 5px;
+      border: 3px solid var(--primary-color);
     }
 
     h1 {
       color: var(--primary-color);
-      font-size: 24px;
+      font-size: 22px;
+      text-shadow: 1px 1px 0px #fff;
+    }
+
+    /* Tabs */
+    .tab-nav {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      background: #ffeaa7;
+      color: #d63031;
+      transition: all 0.3s;
+    }
+
+    .tab-btn.active {
+      background: var(--primary-color);
+      color: white;
+      box-shadow: 0 4px 10px rgba(255, 107, 129, 0.4);
+    }
+
+    /* Flashcard Flip Effect */
+    .flashcard-section {
+      display: block;
+    }
+
+    .card-scene {
+      width: 100%;
+      height: 260px;
+      perspective: 1000px;
+      margin-bottom: 20px;
+      cursor: pointer;
+    }
+
+    .card-inner {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+      border-radius: 25px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    .card-inner.is-flipped {
+      transform: rotateY(180deg);
+    }
+
+    .card-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 25px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      border: 3px dashed #ff758c;
+    }
+
+    .card-front {
+      background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+      color: #2c3e50;
+    }
+
+    .card-back {
+      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+      color: #d63031;
+      transform: rotateY(180deg);
+    }
+
+    .kanji-big {
+      font-size: 90px;
+      font-weight: bold;
+      text-shadow: 2px 2px 5px rgba(255,255,255,0.8);
       margin-bottom: 5px;
     }
 
-    .welcome-text {
-      font-size: 17px;
-      line-height: 1.6;
-      color: #333;
-      background: #fff5f6;
-      padding: 15px;
-      border-radius: 15px;
-      border: 1px dashed var(--primary-color);
-      font-weight: 600;
+    .hint-text {
+      font-size: 13px;
+      color: #57606f;
+      background: rgba(255, 255, 255, 0.6);
+      padding: 4px 12px;
+      border-radius: 10px;
     }
 
-    .btn {
-      background-color: var(--primary-color);
+    .kanji-detail {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .kanji-reading {
+      font-size: 16px;
+      color: #2f3542;
+      background: rgba(255, 255, 255, 0.7);
+      padding: 8px 15px;
+      border-radius: 12px;
+      width: 90%;
+      line-height: 1.5;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .ctrl-btn {
+      background: var(--secondary-color);
       color: white;
       border: none;
-      padding: 14px 28px;
-      font-size: 18px;
+      padding: 12px 18px;
+      border-radius: 20px;
       font-weight: bold;
-      border-radius: 30px;
+      font-size: 14px;
       cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 10px rgba(255, 75, 114, 0.3);
-      width: 100%;
-      margin-top: 10px;
+      transition: all 0.2s;
+      flex: 1;
     }
 
-    .btn:hover {
-      background-color: var(--primary-hover);
+    .ctrl-btn:hover {
       transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
     }
 
-    .quiz-screen {
+    /* Quiz Mode */
+    .quiz-section {
       display: none;
     }
 
-    .quiz-header {
-      margin-bottom: 15px;
-      font-size: 16px;
-      font-weight: bold;
-      color: #555;
+    .quiz-card {
+      background: #fff0f3;
+      border-radius: 20px;
+      padding: 20px;
+      margin-bottom: 20px;
+      border: 2px solid #ffccd5;
     }
 
-    .question-card {
-      background-color: #fff;
-      border: 2px solid #ffe5ec;
-      border-radius: 15px;
-      padding: 25px 15px;
-      margin-bottom: 25px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-    }
-
-    .badge-type {
-      display: inline-block;
-      background-color: #ffe5ec;
-      color: var(--primary-color);
-      padding: 4px 12px;
-      border-radius: 12px;
-      font-size: 13px;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    .japanese-text {
-      font-size: 28px;
+    .quiz-kanji {
+      font-size: 65px;
       font-weight: bold;
       color: var(--primary-color);
-      margin-bottom: 8px;
-      word-break: break-word;
-      line-height: 1.4;
-    }
-
-    .meaning-text {
-      font-size: 15px;
-      color: #666;
     }
 
     .options-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 12px;
-      margin-bottom: 20px;
+      gap: 10px;
     }
 
-    .option-btn {
-      background-color: #f8f9fa;
-      border: 2px solid #e9ecef;
-      border-radius: 12px;
-      padding: 14px;
+    .opt-btn {
+      background: #ffffff;
+      border: 2px solid #70a1ff;
+      padding: 12px;
+      border-radius: 15px;
       font-size: 15px;
       font-weight: bold;
-      color: var(--text-color);
+      color: #2f3542;
       cursor: pointer;
-      transition: all 0.2s ease;
       text-align: left;
     }
 
-    .option-btn:hover {
-      border-color: var(--primary-color);
-      background-color: #fff5f6;
-    }
-
-    .option-btn.correct {
-      background-color: #d4edda;
-      border-color: var(--success-color);
-      color: #155724;
-    }
-
-    .option-btn.wrong {
-      background-color: #f8d7da;
-      border-color: var(--error-color);
-      color: #721c24;
-    }
+    .opt-btn.correct { background: #7bed9f; border-color: #2ed573; color: #2ed573; }
+    .opt-btn.wrong { background: #ff7875; border-color: #ff4d4f; color: white; }
 
     .score-badge {
-      font-size: 22px;
+      font-size: 18px;
       font-weight: bold;
       color: var(--primary-color);
-      background: #ffe5ec;
-      padding: 10px 20px;
-      border-radius: 20px;
-      margin: 15px 0;
-    }
-
-    .final-message {
-      font-size: 19px;
-      font-weight: bold;
-      color: var(--primary-color);
-      line-height: 1.5;
       margin: 15px 0;
     }
   </style>
 </head>
 <body>
 
-  <div class="quiz-container">
-    <!-- Welcome Screen -->
-    <div id="welcome-screen" class="welcome-screen">
-      <img src="https://demonviscount-creator.github.io/Quiz-Mamas/mamas.jpg" alt="Mamas" class="profile-photo">
-      <h1>Kuis Jepang N5 (Bab 1 - 5)</h1>
-      <div class="welcome-text">
-        Untuk mamas tersayang,<br>
-        Semangat belajarnya mamas♥️<br><br>
-        <strong>Semangat mamas cintakuuu♥️♥️♥️</strong>
-      </div>
-      <button class="btn" onclick="startQuiz()">Mulai Tantangan! 🔥</button>
+  <div class="container">
+    <div class="profile-header">
+      <img src="https://demonviscount-creator.github.io/Quiz-Mamas/mamas.jpg" class="profile-photo" alt="Mamas">
+      <h1>Kanji N5 Lucu ♥️</h1>
     </div>
 
-    <!-- Quiz Screen -->
-    <div id="quiz-screen" class="quiz-screen">
-      <div class="quiz-header">
-        <h2>🔥 Level N5 Bab 1-5 (40 Soal)</h2>
+    <!-- Mode Tabs -->
+    <div class="tab-nav">
+      <button class="tab-btn active" id="tab-card" onclick="switchTab('card')">🎴 Flashcard (Bolak-Balik)</button>
+      <button class="tab-btn" id="tab-quiz" onclick="switchTab('quiz')">✍️ Tes Tebak Kanji</button>
+    </div>
+
+    <!-- MODE 1: FLASHCARD -->
+    <div id="flashcard-section" class="flashcard-section">
+      <div class="card-scene" onclick="flipCard()">
+        <div class="card-inner" id="card-inner">
+          <div class="card-face card-front">
+            <div class="kanji-big" id="card-kanji">日</div>
+            <div class="hint-text">👆 Tap / Klik untuk balik kartu!</div>
+          </div>
+          <div class="card-face card-back">
+            <div class="kanji-detail" id="card-meaning">Matahari / Hari</div>
+            <div class="kanji-reading" id="card-reading">
+              <strong>Onyomi:</strong> NICHI, JITSU<br>
+              <strong>Kunyomi:</strong> hi, -bi, ka
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="question-card">
-        <div id="question-number" style="font-size: 14px; color: #888; margin-bottom: 5px;">Soal 1 dari 40</div>
-        <div id="badge-type" class="badge-type">Bab 1</div>
-        <div id="japanese-question" class="japanese-text">はじめまして</div>
-        <div id="meaning-question" class="meaning-text">Apa arti dari ungkapan di atas?</div>
+      <div class="controls">
+        <button class="ctrl-btn" onclick="prevCard()">⬅️ Sebelum</button>
+        <button class="ctrl-btn" style="background:#ff758c;" onclick="randomCard()">🎲 Acak</button>
+        <button class="ctrl-btn" onclick="nextCard()">Lanjut ➡️</button>
+      </div>
+      <div style="margin-top: 15px; font-size: 13px; color: #888;" id="card-index">Kartu 1 dari 20</div>
+    </div>
+
+    <!-- MODE 2: TEBAK KANJI QUIZ -->
+    <div id="quiz-section" class="quiz-section">
+      <div class="quiz-card">
+        <div style="font-size: 12px; color: #aaa;" id="quiz-progress">Soal 1 dari 20</div>
+        <div class="quiz-kanji" id="quiz-kanji">日</div>
+        <div style="font-size: 14px; color: #666;">Apa arti / cara baca Kanji ini?</div>
       </div>
 
       <div class="options-grid" id="options-container"></div>
-    </div>
-
-    <!-- Result Screen -->
-    <div id="result-screen" class="result-screen" style="display: none;">
-      <img src="https://demonviscount-creator.github.io/Quiz-Mamas/mamas.jpg" alt="Mamas" class="profile-photo">
-      <h1>Kuis Selesai!</h1>
-      <div class="score-badge">
-        Skor Mas Sugeng: <span id="final-score">0</span> / <span id="total-score">40</span>
-      </div>
-      <div class="final-message">
-        WAH MAMAS SANGAT PINTAR♥️<br>
-        LENNY SANGAT BANGGA, SAYANGGG SEKALII ♥️
-      </div>
-      <button class="btn" onclick="restartQuiz()">Coba Lagi ❤️</button>
+      <div class="score-badge" id="quiz-score" style="display:none;"></div>
     </div>
   </div>
 
   <script>
-    const wordList = [
-      // BAB 1 (Perkenalan & Profesi)
-      { word: "はじめまして", type: "Bab 1 - Ungkapan", correct: "Hajimemashite (Perkenalkan / Salam kenal)", wrong: ["Arigatou gozaimasu (Terima kasih)", "Sayounara (Selamat tinggal)", "Sumimasen (Permisi / Maaf)"] },
-      { word: "かいしゃいん", type: "Bab 1 - Kosakata", correct: "Kaishain (Pegawai perusahaan)", wrong: ["Gakusei (Siswa)", "Isha (Dokter)", "Ginkouin (Pegawai bank)"] },
-      { word: "ぎんこういん", type: "Bab 1 - Kosakata", correct: "Ginkouin (Pegawai bank)", wrong: ["Kaishain (Pegawai perusahaan)", "Kenshyuusei (Siswa magang)", "Isha (Dokter)"] },
-      { word: "いしゃ", type: "Bab 1 - Kosakata", correct: "Isha (Dokter)", wrong: ["Gakusei (Pelajar)", "Sensei (Guru)", "Kenkyuusha (Peneliti)"] },
-      { word: "けんきゅうしゃ", type: "Bab 1 - Kosakata", correct: "Kenkyuusha (Peneliti)", wrong: ["Kaishain (Karyawan)", "Isha (Dokter)", "Enginea (Insinyur)"] },
-      { word: "だいがく", type: "Bab 1 - Kosakata", correct: "Daigaku (Universitas)", wrong: ["Gakkou (Sekolah)", "Byouin (Rumah sakit)", "Kisha (Kereta)"] },
-      { word: "びょういん", type: "Bab 1 - Kosakata", correct: "Byouin (Rumah sakit)", wrong: ["Daigaku (Universitas)", "Ginkou (Bank)", "Uchi (Rumah)"] },
-      { word: "エンジニア", type: "Bab 1 - Katakana", correct: "Enjinia (Insinyur / Teknisi)", wrong: ["Kenshyuusei (Magang)", "Kaishain (Pegawai)", "Gakusei (Siswa)"] },
-
-      // BAB 2 (Benda & Kepermilikan)
-      { word: "これ / それ / あれ", type: "Bab 2 - Tata Bahasa", correct: "Kore (Ini), Sore (Itu dekat lawan bicara), Are (Itu jauh)", wrong: ["Koko, Soko, Asoko (Sini, Situ, Sana)", "Kono, Sono, Ano (Ini..., Itu...)", "Dare, Dare, Dare (Siapa)"] },
-      { word: "ほん", type: "Bab 2 - Kosakata", correct: "Hon (Buku)", wrong: ["Zasshi (Majalah)", "Shinbun (Koran)", "Teburu (Meja)"] },
-      { word: "じしょ", type: "Bab 2 - Kosakata", correct: "Jisho (Kamus)", wrong: ["Hon (Buku)", "Zasshi (Majalah)", "Nooto (Buku Catatan)"] },
-      { word: "ざっし", type: "Bab 2 - Kosakata", correct: "Zasshi (Majalah)", wrong: ["Shinbun (Koran)", "Jisho (Kamus)", "Techou (Buku agenda)"] },
-      { word: "しんぶん", type: "Bab 2 - Kosakata", correct: "Shinbun (Koran)", wrong: ["Zasshi (Majalah)", "Hon (Buku)", "Tegami (Surat)"] },
-      { word: "てちょう", type: "Bab 2 - Kosakata", correct: "Techou (Buku saku / Agenda)", wrong: ["Meishi (Kartu nama)", "Kado (Kartu)", "Jisho (Kamus)"] },
-      { word: "めいし", type: "Bab 2 - Kosakata", correct: "Meishi (Kartu nama)", wrong: ["Techou (Buku saku)", "Shinbun (Koran)", "Kagi (Kunci)"] },
-      { word: "かぎ", type: "Bab 2 - Kosakata", correct: "Kagi (Kunci)", wrong: ["Tokei (Jam)", "Kasa (Payung)", "Kaban (Tas)"] },
-      { word: "とけい", type: "Bab 2 - Kosakata", correct: "Tokei (Jam / Arloji)", wrong: ["Kagi (Kunci)", "Kaban (Tas)", "Kuruma (Mobil)"] },
-      { word: "かさ", type: "Bab 2 - Kosakata", correct: "Kasa (Payung)", wrong: ["Kaban (Tas)", "Kutsu (Sepatu)", "Boushi (Topi)"] },
-
-      // BAB 3 (Tempat & Keterangan Petunjuk)
-      { word: "ここ / そこ / あそこ", type: "Bab 3 - Tata Bahasa", correct: "Koko (Sini), Soko (Situ), Asoko (Sana)", wrong: ["Kore, Sore, Are (Ini, Itu, Itu jauh)", "Kochira, Sochira, Achira (Arah/Sopan)", "Doko, Dare, Nani (Mana, Siapa, Apa)"] },
-      { word: "きょうしつ", type: "Bab 3 - Kosakata", correct: "Kyoushitsu (Ruang kelas)", wrong: ["Shokudou (Kantin)", "Jimusho (Kantor)", "Uk受付 (Resepsionis)"] },
-      { word: "しょくどう", type: "Bab 3 - Kosakata", correct: "Shokudou (Kantin / Ruang makan)", wrong: ["Kyoushitsu (Ruang kelas)", "Toire (Toilet)", "Uchi (Rumah)"] },
-      { word: "じむしょ", type: "Bab 3 - Kosakata", correct: "Jimusho (Kantor)", wrong: ["Ukewatashi (Kasir)", "Ginkou (Bank)", "Gakkou (Sekolah)"] },
-      { word: "うけつけ", type: "Bab 3 - Kosakata", correct: "Uketsuke (Resepsionis / Meja informasi)", wrong: ["Jimusho (Kantor)", "Kaijou (Ruang rapat)", "Uriba (Tempat penjualan)"] },
-      { word: "へや", type: "Bab 3 - Kosakata", correct: "Heya (Kamar / Ruangan)", wrong: ["Uchi (Rumah)", "Niwa (Halaman)", "Kuuha (Bandara)"] },
-      { word: "おてあらい", type: "Bab 3 - Kosakata", correct: "Otearai (Toilet / Kamar kecil)", wrong: ["Ofuro (Kamar mandi)", "Shokudou (Kantin)", "Uketsuke (Resepsionis)"] },
-      { word: "かいだん", type: "Bab 3 - Kosakata", correct: "Kaidan (Tangga)", wrong: ["Erebeta (Lift)", "Esukareta (Eskalator)", "Douru (Jalan)"] },
-      { word: "エレベーター", type: "Bab 3 - Katakana", correct: "Erebe-ta- (Lift / Elevator)", wrong: ["Esukare-ta- (Eskalator)", "Kaidan (Tangga)", "Eakondishona- (AC)"] },
-
-      // BAB 4 (Waktu, Jam, Hari, Kata Kerja Present/Past)
-      { word: "いま なんじ ですか", type: "Bab 4 - Kalimat", correct: "Ima nan-ji desu ka? (Sekarang jam berapa?)", wrong: ["Ima nan-fun desu ka? (Sekarang berapa menit?)", "Kyou wa nan-yobi desu ka? (Hari ini hari apa?)", "Kyou wa nan-nichi desu ka? (Hari ini tanggal berapa?)"] },
-      { word: "おきます", type: "Bab 4 - Kata Kerja", correct: "Okimasu (Bangun)", wrong: ["Nemasu (Tidur)", "Hatarakimasu (Bekerja)", "Yasumimasu (Istirahat)"] },
-      { word: "ねます", type: "Bab 4 - Kata Kerja", correct: "Nemasu (Tidur)", wrong: ["Okimasu (Bangun)", "Owarimasu (Selesai)", "Benkyou shimasu (Belajar)"] },
-      { word: "はたらきます", type: "Bab 4 - Kata Kerja", correct: "Hatarakimasu (Bekerja)", wrong: ["Benkyou shimasu (Belajar)", "Yasumimasu (Berlibur/Istirahat)", "Owarimasu (Selesai)"] },
-      { word: "やすみます", type: "Bab 4 - Kata Kerja", correct: "Yasumimasu (Istirahat / Libur)", wrong: ["Hatarakimasu (Bekerja)", "Nemasu (Tidur)", "Owarimasu (Selesai)"] },
-      { word: "べんきょうします", type: "Bab 4 - Kata Kerja", correct: "Benkyou shimasu (Belajar)", wrong: ["Hatarakimasu (Bekerja)", "Okimasu (Bangun)", "Owarimasu (Selesai)"] },
-      { word: "おわります", type: "Bab 4 - Kata Kerja", correct: "Owarimasu (Selesai / Berakhir)", wrong: ["Hajimarimasu (Mulai)", "Okimasu (Bangun)", "Nemasu (Tidur)"] },
-      { word: "げつようび", type: "Bab 4 - Hari", correct: "Getsuyoubi (Hari Senin)", wrong: ["Kayoubi (Hari Selasa)", "Suiyoubi (Hari Rabu)", "Mokuyoubi (Hari Kamis)"] },
-
-      // BAB 5 (Perpindahan: Arah, Alat Transportasi, Tanggal)
-      { word: "いきます", type: "Bab 5 - Kata Kerja", correct: "Ikimasu (Pergi)", wrong: ["Kimasu (Datang)", "Kaerimasu (Pulang)", "Tabemasu (Makan)"] },
-      { word: "きます", type: "Bab 5 - Kata Kerja", correct: "Kimasu (Datang)", wrong: ["Ikimasu (Pergi)", "Kaerimasu (Pulang)", "Nomimasu (Minum)"] },
-      { word: "かえります", type: "Bab 5 - Kata Kerja", correct: "Kaerimasu (Pulang)", wrong: ["Ikimasu (Pergi)", "Kimasu (Datang)", "Arukitamasu (Berjalan)"] },
-      { word: "でんしゃ", type: "Bab 5 - Transportasi", correct: "Densha (Kereta listrik)", wrong: ["Shinkansen (Kereta cepat)", "Chikatetsu (Kereta bawah tanah)", "Basu (Bus)"] },
-      { word: "ちかてつ", type: "Bab 5 - Transportasi", correct: "Chikatetsu (Kereta bawah tanah)", wrong: ["Densha (Kereta api)", "Shinkansen (Kereta cepat)", "Hikouki (Pesawat)"] },
-      { word: "ひこうき", type: "Bab 5 - Transportasi", correct: "Hikouki (Pesawat terbang)", wrong: ["Fune (Kapal laut)", "Kuruma (Mobil)", "Jitensha (Sepeda)"] },
-      { word: "あるいて", type: "Bab 5 - Cara", correct: "Aruite (Jalan kaki)", wrong: ["Jitensha de (Naik sepeda)", "Basu de (Naik bus)", "Kuruma de (Naik mobil)"] },
-      { word: "たんじょうび", type: "Bab 5 - Kosakata", correct: "Tanjoubi (Ulang tahun)", wrong: ["Kyou (Hari ini)", "Ashita (Besok)", "Kinou (Kemarin)"] }
+    const kanjiList = [
+      { kanji: "日", meaning: "Matahari / Hari", on: "NICHI, JITSU", kun: "hi, -bi, ka" },
+      { kanji: "月", meaning: "Bulan", on: "GETSU, GATSU", kun: "tsuki" },
+      { kanji: "木", meaning: "Pohon / Kayu", on: "MOKU, BOKU", kun: "ki" },
+      { kanji: "山", meaning: "Gunung", on: "SAN", kun: "yama" },
+      { kanji: "川", meaning: "Sungai", on: "SEN", kun: "kawa" },
+      { kanji: "田", meaning: "Sawah", on: "DEN", kun: "ta" },
+      { kanji: "人", meaning: "Orang", on: "JIN, NIN", kun: "hito" },
+      { kanji: "口", meaning: "Mulut", on: "KOU", kun: "kuchi" },
+      { kanji: "車", meaning: "Mobil / Roda", on: "SHA", kun: "kuruma" },
+      { kanji: "門", meaning: "Gerbang", on: "MON", kun: "kado" },
+      { kanji: "火", meaning: "Api", on: "KA", kun: "hi" },
+      { kanji: "水", meaning: "Air", on: "SUI", kun: "mizu" },
+      { kanji: "金", meaning: "Emas / Uang", on: "KIN", kun: "kane" },
+      { kanji: "土", meaning: "Tanah", on: "TO, DO", kun: "tsuchi" },
+      { kanji: "子", meaning: "Anak", on: "SHI, SU", kun: "ko" },
+      { kanji: "女", meaning: "Wanita", on: "JO", kun: "onna" },
+      { kanji: "学", meaning: "Belajar", on: "GAKU", kun: "mana(bu)" },
+      { kanji: "生", meaning: "Hidup / Lahir", on: "SEI, SHO", kun: "i(kiru), u(mareru)" },
+      { kanji: "先", meaning: "Dahulu / Dulu", on: "SEN", kun: "saki" },
+      { kanji: "私", meaning: "Saya / Aku", on: "SHI", kun: "watashi" }
     ];
 
-    let quizData = [];
-    let currentQuestion = 0;
+    let currentCardIndex = 0;
+    let quizIndex = 0;
     let score = 0;
     let canAnswer = true;
+    let shuffledQuiz = [];
 
-    function generateQuizData() {
-      const shuffled = [...wordList].sort(() => 0.5 - Math.random());
-
-      quizData = shuffled.map(item => {
-        const options = [item.correct, ...item.wrong].sort(() => 0.5 - Math.random());
-        return {
-          word: item.word,
-          type: item.type,
-          options: options,
-          correctIndex: options.indexOf(item.correct)
-        };
-      });
+    // Flashcard Functions
+    function updateCard() {
+      const card = kanjiList[currentCardIndex];
+      document.getElementById('card-kanji').innerText = card.kanji;
+      document.getElementById('card-meaning').innerText = card.meaning;
+      document.getElementById('card-reading').innerHTML = `<strong>Onyomi:</strong> ${card.on}<br><strong>Kunyomi:</strong> ${card.kun}`;
+      document.getElementById('card-index').innerText = `Kartu ${currentCardIndex + 1} dari ${kanjiList.length}`;
+      document.getElementById('card-inner').classList.remove('is-flipped');
     }
 
+    function flipCard() {
+      document.getElementById('card-inner').classList.toggle('is-flipped');
+    }
+
+    function nextCard() {
+      currentCardIndex = (currentCardIndex + 1) % kanjiList.length;
+      updateCard();
+    }
+
+    function prevCard() {
+      currentCardIndex = (currentCardIndex - 1 + kanjiList.length) % kanjiList.length;
+      updateCard();
+    }
+
+    function randomCard() {
+      currentCardIndex = Math.floor(Math.random() * kanjiList.length);
+      updateCard();
+    }
+
+    // Switch Tab
+    function switchTab(tab) {
+      if (tab === 'card') {
+        document.getElementById('flashcard-section').style.display = 'block';
+        document.getElementById('quiz-section').style.display = 'none';
+        document.getElementById('tab-card').classList.add('active');
+        document.getElementById('tab-quiz').classList.remove('active');
+      } else {
+        document.getElementById('flashcard-section').style.display = 'none';
+        document.getElementById('quiz-section').style.display = 'block';
+        document.getElementById('tab-quiz').classList.add('active');
+        document.getElementById('tab-card').classList.remove('active');
+        startQuiz();
+      }
+    }
+
+    // Quiz Functions
     function startQuiz() {
-      generateQuizData();
-      currentQuestion = 0;
+      shuffledQuiz = [...kanjiList].sort(() => 0.5 - Math.random());
+      quizIndex = 0;
       score = 0;
-      document.getElementById('welcome-screen').style.display = 'none';
-      document.getElementById('quiz-screen').style.display = 'block';
-      loadQuestion();
+      document.getElementById('quiz-score').style.display = 'none';
+      loadQuizQuestion();
     }
 
-    function loadQuestion() {
+    function loadQuizQuestion() {
       canAnswer = true;
-      const q = quizData[currentQuestion];
-      document.getElementById('question-number').innerText = `Soal ${currentQuestion + 1} dari ${quizData.length}`;
-      document.getElementById('badge-type').innerText = q.type;
-      document.getElementById('japanese-question').innerText = q.word;
+      const q = shuffledQuiz[quizIndex];
+      document.getElementById('quiz-progress').innerText = `Soal ${quizIndex + 1} dari ${shuffledQuiz.length}`;
+      document.getElementById('quiz-kanji').innerText = q.kanji;
 
-      const optionsContainer = document.getElementById('options-container');
-      optionsContainer.innerHTML = '';
+      const wrongOpts = kanjiList.filter(k => k.kanji !== q.kanji).sort(() => 0.5 - Math.random()).slice(0, 3);
+      const options = [q, ...wrongOpts].sort(() => 0.5 - Math.random());
 
-      q.options.forEach((opt, index) => {
+      const container = document.getElementById('options-container');
+      container.innerHTML = '';
+
+      options.forEach(opt => {
         const btn = document.createElement('button');
-        btn.className = 'option-btn';
-        btn.innerText = opt;
-        btn.onclick = () => selectOption(index, btn);
-        optionsContainer.appendChild(btn);
+        btn.className = 'opt-btn';
+        btn.innerText = `${opt.meaning} (${opt.kun})`;
+        btn.onclick = () => selectQuizOption(opt.kanji === q.kanji, btn);
+        container.appendChild(btn);
       });
     }
 
-    function selectOption(selectedIndex, btnElement) {
+    function selectQuizOption(isCorrect, btn) {
       if (!canAnswer) return;
       canAnswer = false;
 
-      const q = quizData[currentQuestion];
-      const buttons = document.querySelectorAll('.option-btn');
-
-      if (selectedIndex === q.correctIndex) {
-        btnElement.classList.add('correct');
+      if (isCorrect) {
+        btn.classList.add('correct');
         score++;
       } else {
-        btnElement.classList.add('wrong');
-        buttons[q.correctIndex].classList.add('correct');
+        btn.classList.add('wrong');
       }
 
       setTimeout(() => {
-        currentQuestion++;
-        if (currentQuestion < quizData.length) {
-          loadQuestion();
+        quizIndex++;
+        if (quizIndex < shuffledQuiz.length) {
+          loadQuizQuestion();
         } else {
-          showResult();
+          document.getElementById('options-container').innerHTML = '';
+          const scoreBadge = document.getElementById('quiz-score');
+          scoreBadge.style.display = 'block';
+          scoreBadge.innerHTML = `🎉 Selesai!<br>Skor Mamas: <strong>${score} / ${shuffledQuiz.length}</strong><br><br><button class="ctrl-btn" onclick="startQuiz()">Coba Lagi ❤️</button>`;
         }
       }, 1000);
     }
 
-    function showResult() {
-      document.getElementById('quiz-screen').style.display = 'none';
-      document.getElementById('result-screen').style.display = 'flex';
-      document.getElementById('final-score').innerText = score;
-      document.getElementById('total-score').innerText = quizData.length;
-    }
-
-    function restartQuiz() {
-      document.getElementById('result-screen').style.display = 'none';
-      startQuiz();
-    }
+    // Init
+    updateCard();
   </script>
 </body>
 </html>
